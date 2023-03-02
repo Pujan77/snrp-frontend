@@ -28,6 +28,7 @@ const UserPage = () => {
       })
       .catch((error) => {
         console.log(error);
+        setLoading(false);
       });
   };
   const handleSubmit = (values, { resetForm, setSubmitting }) => {
@@ -51,11 +52,13 @@ const UserPage = () => {
           })
           .catch((error) => {
             console.log(error);
+            setLoading(false);
             setSubmitting(false);
           });
       })
       .catch((error) => {
         setSubmitting(false);
+        setLoading(false);
         console.log(error);
       });
   };
