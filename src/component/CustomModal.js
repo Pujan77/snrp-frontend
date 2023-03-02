@@ -2,7 +2,14 @@ import React, { useContext } from "react";
 import { Button, Modal } from "react-bootstrap";
 import AuthContext from "../context/AuthContext";
 
-const CustomModal = ({ show, handleClose, bodyData, title, handleAccept }) => {
+const CustomModal = ({
+  show,
+  handleClose,
+  bodyData,
+  title,
+  handleAccept,
+  handleReject,
+}) => {
   return (
     <Modal
       className="whitelist_modal"
@@ -118,10 +125,18 @@ const CustomModal = ({ show, handleClose, bodyData, title, handleAccept }) => {
         <Button variant="secondary" onClick={handleClose}>
           Close
         </Button>
-        <Button onClick={() => handleAccept(bodyData._id)} variant="primary">
+        <Button
+          onClick={() => handleAccept(bodyData._id, bodyData.discordIdentifier)}
+          variant="primary"
+        >
           Accept
         </Button>
-        <Button variant="danger">Reject</Button>
+        <Button
+          onClick={() => handleReject(bodyData._id, bodyData.discordIdentifier)}
+          variant="danger"
+        >
+          Reject
+        </Button>
       </Modal.Footer>
     </Modal>
   );

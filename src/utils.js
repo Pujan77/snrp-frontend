@@ -185,3 +185,40 @@ export function isDatePlusFiveDays(date) {
   // Compare the target date plus 5 days to the current date and time
   return currentDate.getTime() === targetDate.getTime();
 }
+export const randomAcceptedImages = [
+  {
+    url: "https://cdn.discordapp.com/attachments/838025726695047258/1080916854136111204/wha2.gif",
+  },
+  {
+    url: "https://cdn.discordapp.com/attachments/838025726695047258/1080916668211015720/wha.gif",
+  },
+  {
+    url: "https://cdn.discordapp.com/attachments/838025726695047258/1080917678891479070/Cat.gif",
+  },
+  {
+    url: "https://cdn.discordapp.com/attachments/838025726695047258/1080918719502499902/Untitled_Meme_2_1.gif",
+  },
+  {
+    url: "https://cdn.discordapp.com/attachments/838025726695047258/1080918821998702713/pussy.gif",
+  },
+  {
+    url: "https://cdn.discordapp.com/attachments/838025726695047258/1080920079379734548/Spongy.gif",
+  },
+];
+export const randomRejectedImages = [
+  {
+    url: "https://cdn.discordapp.com/attachments/838025726695047258/1080923235555750008/kidcry.gif",
+  },
+  {
+    url: "https://cdn.discordapp.com/attachments/838025726695047258/1080921986789810258/Spoidermen.gif",
+  },
+  {
+    url: "https://cdn.discordapp.com/attachments/838025726695047258/1080921962299273226/Spongysad.gif",
+  },
+  {
+    url: "https://cdn.discordapp.com/attachments/838025726695047258/1080921327088717895/Lady_gaga_ko_baba.gif",
+  },
+  {
+    url: "https://cdn.discordapp.com/attachments/838025726695047258/1080920823063392327/Lady_gaaga.gif",
+  },
+];

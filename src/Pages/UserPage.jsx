@@ -64,8 +64,21 @@ const UserPage = () => {
       whitelistStatusPager();
     }
   }, [user]);
-
-  if (whitelistFound && whitelistData) {
+  if (loading) {
+    return (
+      <div>
+        <Spinner animation="grow" />
+        <Spinner animation="grow" />
+        <Spinner animation="grow" />
+      </div>
+    );
+  } else if (whitelistFound !== (null && true) && whitelistData === null) {
+    return (
+      <div>
+        <WhitelistForm handleSubmit={handleSubmit} />
+      </div>
+    );
+  } else if (whitelistFound && whitelistData) {
     if (whitelistData[0]?.rejected) {
       return (
         <div className="white-container">
@@ -111,20 +124,6 @@ const UserPage = () => {
         </div>
       );
     }
-  } else if (whitelistFound !== (null && true) && whitelistData === null) {
-    return (
-      <div>
-        <WhitelistForm handleSubmit={handleSubmit} />
-      </div>
-    );
-  } else if (loading) {
-    return (
-      <div>
-        <Spinner animation="grow" />
-        <Spinner animation="grow" />
-        <Spinner animation="grow" />
-      </div>
-    );
   }
 };
 
