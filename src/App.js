@@ -1,11 +1,10 @@
-import logo from "./logo.svg";
 import "./App.css";
-import Whitelist from "./Pages/Whitelist";
+import CustomRoutes from "./Routes/CustomRoutes";
 
 function App() {
   return (
     <div className="App">
-      <Whitelist />
+      <CustomRoutes />
     </div>
   );
 }
