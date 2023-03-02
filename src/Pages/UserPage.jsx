@@ -111,7 +111,7 @@ const UserPage = () => {
         </div>
       );
     }
-  } else if (whitelistFound !== (null && true) && whitelistData !== null) {
+  } else if (whitelistFound !== (null && true) && whitelistData === null) {
     return (
       <div>
         <WhitelistForm handleSubmit={handleSubmit} />
