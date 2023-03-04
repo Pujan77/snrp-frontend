@@ -15,9 +15,16 @@ const StaffPage = () => {
   const [loading, setLoading] = useState(true);
 
   const [show, setShow] = useState(false);
-
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
+
+  const [showA, setShowA] = useState(false);
+  const handleCloseA = () => setShowA(false);
+  const handleShowA = () => setShowA(true);
+
+  const [showB, setShowB] = useState(false);
+  const handleCloseB = () => setShowB(false);
+  const handleShowB = () => setShowB(true);
 
   const allList = async () => {
     try {
@@ -109,16 +116,18 @@ const StaffPage = () => {
         });
     }
   };
-  const handleReject = async (id, discId) => {
+  const handleReject = async (id, discId, rejectReason) => {
     let res = await whitelistResponding(id, {
       accepted: false,
       rejected: true,
-      rejectReason: "Improve your form, maybe you will be selected later",
+      rejectReason: rejectReason
+        ? rejectReason
+        : "Very low effort on the form.",
     });
     if (res) {
       axios
         .post(`${process.env.REACT_APP_DISCORD_WHITELIST_ACCEPT}`, {
-          content: `Sorry <@${discId}> ! You did not clear the form. Wait 7 days to re-apply`,
+          content: `Sorry <@${discId}> ! You did not clear the form. Reason: ${rejectReason} Wait 7 days to re-apply`,
           embeds: [
             {
               color: 15807514,
@@ -202,6 +211,7 @@ const StaffPage = () => {
                         title={"Form Detail"}
                         handleAccept={handleAccept}
                         handleReject={handleReject}
+                        isChecking={true}
                       />
                     </>
                   );
@@ -222,12 +232,23 @@ const StaffPage = () => {
               <tbody>
                 {allAcceptedData.map((data, i) => {
                   return (
-                    <tr>
-                      <td>{data.nameIrl}</td>
-                      <td>{data.ageIrl}</td>
-                      <td>{data.charName}</td>
-                      <td>{data.discordId}</td>
-                    </tr>
+                    <>
+                      <tr key={i} onClick={handleShowA}>
+                        <td>{data.nameIrl}</td>
+                        <td>{data.ageIrl}</td>
+                        <td>{data.charName}</td>
+                        <td>{data.discordId}</td>
+                      </tr>
+                      <CustomModal
+                        handleClose={handleCloseA}
+                        show={showA}
+                        bodyData={data}
+                        title={"Form Detail"}
+                        handleAccept={handleAccept}
+                        handleReject={handleReject}
+                        isChecking={false}
+                      />
+                    </>
                   );
                 })}
               </tbody>
@@ -246,12 +267,23 @@ const StaffPage = () => {
               <tbody>
                 {allRejectedData.map((data, i) => {
                   return (
-                    <tr>
-                      <td>{data.nameIrl}</td>
-                      <td>{data.ageIrl}</td>
-                      <td>{data.charName}</td>
-                      <td>{data.discordId}</td>
-                    </tr>
+                    <>
+                      <tr key={i} onClick={handleShowB}>
+                        <td>{data.nameIrl}</td>
+                        <td>{data.ageIrl}</td>
+                        <td>{data.charName}</td>
+                        <td>{data.discordId}</td>
+                      </tr>
+                      <CustomModal
+                        handleClose={handleCloseB}
+                        show={showB}
+                        bodyData={data}
+                        title={"Form Detail"}
+                        handleAccept={handleAccept}
+                        handleReject={handleReject}
+                        isChecking={false}
+                      />
+                    </>
                   );
                 })}
               </tbody>

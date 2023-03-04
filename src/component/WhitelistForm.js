@@ -1,7 +1,22 @@
 import { ErrorMessage, Field, Form, Formik } from "formik";
 import React from "react";
 import { validationSchemaWhitelist } from "../utils";
-
+import { Popover } from "react-bootstrap";
+import OverlayTrigger from "react-bootstrap/OverlayTrigger";
+const popover = (
+  <Popover id="popover-basic">
+    <Popover.Body>
+      <a
+        href="https://discord.com/channels/1077469686897311765/1077469690001104949"
+        target="blank"
+        className="anchor_custom"
+      >
+        Click Here
+      </a>{" "}
+      for tutorial.
+    </Popover.Body>
+  </Popover>
+);
 const WhitelistForm = ({ handleSubmit }) => {
   return (
     <div className="container whitelist_container">
@@ -84,7 +99,7 @@ const WhitelistForm = ({ handleSubmit }) => {
                       component="div"
                     />
                   </div>
-                  <div className="col-6">
+                  <div className="col-5">
                     <label>Discord ID</label>
                     <Field
                       type="text"
@@ -98,6 +113,16 @@ const WhitelistForm = ({ handleSubmit }) => {
                       name="discordIdentifier"
                       component="div"
                     />
+                  </div>
+                  <div className="col-1">
+                    <OverlayTrigger
+                      trigger="click"
+                      placement="top"
+                      overlay={popover}
+                      className="popover-custom"
+                    >
+                      <button className="info_button">i</button>
+                    </OverlayTrigger>
                   </div>
                 </div>
               </div>

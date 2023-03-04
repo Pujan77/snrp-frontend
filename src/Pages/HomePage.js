@@ -1,4 +1,14 @@
 import React from "react";
+import {
+  Background,
+  Car1,
+  Car2,
+  Franklin,
+  Towelman,
+  car,
+  gangster,
+  wallet,
+} from "../assets";
 
 const HomePage = () => {
   return (
@@ -12,10 +22,10 @@ const HomePage = () => {
           <p className="text">
             Join a massive english <span>Grand Theft Auto V</span> roleplaying
             community. Our voice chat based server will provide you the best
-            playing experience! With over <span>200</span> players you will
-            never feel alone in the sunny city of Los Santos! Join a gang or law
-            enforcement faction, work as a fisherman, or pursue a professional
-            poker playing career. The opportunities are endless!{" "}
+            playing experience! With our players you will never feel alone in
+            the sunny city of Los Santos! Join a gang or law enforcement
+            faction, work as business, or pursue a professional poker playing
+            career. The opportunities are endless!{" "}
             <span>The best GTA V RP server</span>
             is waiting for you! Download & Play now!
           </p>
@@ -23,10 +33,7 @@ const HomePage = () => {
       </div>
       <div className="two-images-container">
         <div className="img-1">
-          <img
-            src="https://secret-sahil.github.io/Habour-Roleplay-Website/images/part-1-car.png"
-            alt=""
-          />
+          <img src={Car1} alt="" />
           <div className="img-1-text">
             <p>What You need to play?</p>
             <ul>
@@ -46,10 +53,7 @@ const HomePage = () => {
           </div>
         </div>
         <div className="img-2">
-          <img
-            src="https://secret-sahil.github.io/Habour-Roleplay-Website/images/part-2-car.png"
-            alt=""
-          />
+          <img src={Car2} alt="" />
           <div className="img-2-text">
             <p>Why to play roleplay?</p>
             <li className="text">New Friendships On The Horizon</li>
@@ -64,10 +68,7 @@ const HomePage = () => {
         </div>
       </div>
       <div className="pop-img-1">
-        <img
-          src="https://secret-sahil.github.io/Habour-Roleplay-Website/images/gangster-girl.png"
-          alt=""
-        />
+        <img src={gangster} alt="" />
       </div>
       <div className="white-container-2">
         <div className="small-container-2">
@@ -78,13 +79,10 @@ const HomePage = () => {
         </div>
       </div>
       <div className="image-container">
-        <img
-          src="https://secret-sahil.github.io/Habour-Roleplay-Website/images/bagkground-image.jpg"
-          alt="background"
-        />
+        <img src={Background} alt="background" />
         <div className="box">
           <div className="boxes left">
-            <p className="feature_big">Create your own autopark</p>
+            <p className="feature_big">Ride your dream cars</p>
             <p className="b-text">
               <span>Select from 300+ vehicles!</span>
             </p>
@@ -93,10 +91,7 @@ const HomePage = () => {
               DRIFTER OR A DASHING DRAG RACER?
             </p>
             <div className="car-float-img">
-              <img
-                src="https://secret-sahil.github.io/Habour-Roleplay-Website/images/icons/car.png"
-                alt="car"
-              />
+              <img src={car} alt="car" />
             </div>
           </div>
           <div className="boxes right">
@@ -109,26 +104,20 @@ const HomePage = () => {
               COOL REWARDS.
             </p>
             <div className="man-float-img">
-              <img
-                src="https://secret-sahil.github.io/Habour-Roleplay-Website/images/icons/man-with-towel.png"
-                alt="man with towel"
-              />
+              <img src={Towelman} alt="man with towel" />
             </div>
           </div>
           <div className="boxes left">
             <p>Become a gangster</p>
             <p className="b-text">
-              <span>Break the law on Harbour Roleplay server</span>
+              <span>Break the law on Supreme Nepal Roleplay server</span>
             </p>
             <p className="text">
               BECOME A GANGSTER OR CREATE YOUR OWN CRIMINAL FAMILY?? <br /> GET
               INTO ONE OF THE CRIMINAL GANGS AND DO DANGEROUS BUSINESS.
             </p>
             <div className="gangster-float-img">
-              <img
-                src="https://secret-sahil.github.io/Habour-Roleplay-Website/images/icons/franky-holding-bat.png"
-                alt="gangster"
-              />
+              <img src={Franklin} alt="gangster" />
             </div>
           </div>
           <div className="boxes right">
@@ -140,10 +129,7 @@ const HomePage = () => {
               MAKE THIS STATE PAY YOU MONEY, IT'S ALL IN YOUR HANDS.
             </p>
             <div className="bag-float-img">
-              <img
-                src="https://secret-sahil.github.io/Habour-Roleplay-Website/images/icons/wallet.png"
-                alt="man with towel"
-              />
+              <img src={wallet} alt="man with towel" />
             </div>
           </div>
         </div>

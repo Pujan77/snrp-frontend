@@ -15,8 +15,8 @@ const Signup = () => {
     if (res) {
       axios
         .post(`${process.env.REACT_APP_DISCORD_SIGNUP}`, {
-          content: `Hello <@&1078649873127182386>, ${values.firstName} ${values.lastName}, with email:${values.email} has signed up to the system.`,
-          username: "Trevor Kaka",
+          content: `Hello staffs, ${values.firstName} ${values.lastName}, with email:${values.email} has signed up to the system.`,
+          username: "Welcome Botey",
           avatar_url:
             "https://i.pinimg.com/originals/b6/97/2d/b6972d320611abaeb4e15c041667c939.jpg",
           attachments: [],

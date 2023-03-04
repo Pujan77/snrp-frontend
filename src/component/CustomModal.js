@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { Button, Modal } from "react-bootstrap";
 import AuthContext from "../context/AuthContext";
 
@@ -9,7 +9,11 @@ const CustomModal = ({
   title,
   handleAccept,
   handleReject,
+  isChecking,
 }) => {
+  const [rejectReason, setRejectReason] = useState(
+    "Very low effort on the form"
+  );
   return (
     <Modal
       className="whitelist_modal"
@@ -120,23 +124,43 @@ const CustomModal = ({
           </div>
           <hr />
         </div>
+        <div className="form-group mt-3 mb-1">
+          <input
+            type="text"
+            placeholder="Reason for reject"
+            className="form-control"
+            onChange={(e) => setRejectReason(e.target.value)}
+          />
+        </div>
       </Modal.Body>
       <Modal.Footer>
         <Button variant="secondary" onClick={handleClose}>
           Close
         </Button>
-        <Button
-          onClick={() => handleAccept(bodyData._id, bodyData.discordIdentifier)}
-          variant="primary"
-        >
-          Accept
-        </Button>
-        <Button
-          onClick={() => handleReject(bodyData._id, bodyData.discordIdentifier)}
-          variant="danger"
-        >
-          Reject
-        </Button>
+        {isChecking ? (
+          <>
+            <Button
+              onClick={() =>
+                handleAccept(bodyData._id, bodyData.discordIdentifier)
+              }
+              variant="primary"
+            >
+              Accept
+            </Button>
+            <Button
+              onClick={() =>
+                handleReject(
+                  bodyData._id,
+                  bodyData.discordIdentifier,
+                  rejectReason
+                )
+              }
+              variant="danger"
+            >
+              Reject
+            </Button>
+          </>
+        ) : null}
       </Modal.Footer>
     </Modal>
   );

@@ -1,7 +1,5 @@
 import axios from "axios";
 
-const token = JSON.parse(localStorage.getItem("authToken"));
-
 export const signUpForm = async (data) =>
   // axiosInstance.post(`/api/v1/auth/change-password/`, data);
   axios.post(`${process.env.REACT_APP_BASE_URL}/signup`, data);
@@ -48,13 +46,13 @@ export const staffWhitelistAllAccepted = async () =>
 export const whitelistForm = async (body) =>
   axios.post(`${process.env.REACT_APP_BASE_URL}/whitelist`, body, {
     headers: {
-      Authorization: token,
+      Authorization: JSON.parse(localStorage.getItem("authToken")),
     },
   });
 
 export const formResponse = async (param, body) =>
   axios.put(`${process.env.REACT_APP_BASE_URL}/whitelist/${param}`, body, {
     headers: {
-      Authorization: token,
+      Authorization: JSON.parse(localStorage.getItem("authToken")),
     },
   });

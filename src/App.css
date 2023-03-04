@@ -317,19 +317,19 @@ hr{
 .man-float-img img{
     width: 15rem;
     position:absolute;
-    left: 10rem;
+    left: 30rem;
     top: 13rem;
 }
 .gangster-float-img img{
     width: 13rem;
     position:absolute;
-    right: 10rem;
+    right: 30rem;
     top: 27rem;
 }
 .bag-float-img img{
     width: 20rem;
     position:absolute;
-    left: 10rem;
+    left: 35rem;
     top: 43rem;
 }
 
@@ -398,4 +398,22 @@ div.form_det {
 
 p.feature_big {
     color: black;
+}
+
+button.info_button {
+    margin-top: 30px;
+    width: 28px;
+    border-radius: 50%;
+    font-family: cursive;
+    color: #000842;
+    background: #90adad;
+    border: none;
+}
+
+a.anchor_custom {
+    color: black;
+}
+
+a.anchor_custom:hover {
+    text-decoration: none;
 }
