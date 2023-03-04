@@ -127,7 +127,6 @@ const UserPage = () => {
       </div>
     );
   } else {
-    console.log(whitelistFound, whitelistData);
     return <div>Reload page to begin</div>;
   }
 };

@@ -2,6 +2,8 @@ import React, { useContext, useEffect, useState } from "react";
 import AuthContext from "../context/AuthContext";
 import { Spinner, Tab, Table, Tabs } from "react-bootstrap";
 import CustomModal from "../component/CustomModal";
+import axios from "axios";
+import { randomAcceptedImages, randomRejectedImages } from "../utils";
 
 const StaffPage = () => {
   const { user, staffGetAllWhitelist, whitelistResponding } =
@@ -69,16 +71,83 @@ const StaffPage = () => {
         setLoading(false);
       });
   };
-  const handleAccept = async (id) => {
+  const handleAccept = async (id, discId) => {
     let res = await whitelistResponding(id, {
       accepted: true,
       rejected: false,
       rejectReason: "",
     });
     if (res) {
-      reloadAllData();
+      axios
+        .post(`${process.env.REACT_APP_DISCORD_WHITELIST_ACCEPT}`, {
+          content: `Congratulations <@${discId}> ! You cleared form. Brace yourself for interview.`,
+          embeds: [
+            {
+              color: 258479,
+              author: {
+                name: "Yessssssss!!!!",
+                icon_url:
+                  "https://static.wikia.nocookie.net/gtawiki/images/4/49/LesterCrest-GTAVee.png",
+              },
+              image: {
+                url: `${
+                  randomAcceptedImages[Math.floor(Math.random() * 6)].url
+                }`,
+              },
+            },
+          ],
+          username: "Franklin Dada",
+          avatar_url:
+            "https://static.wikia.nocookie.net/characterprofile/images/b/bd/78642356-3922-4971-AB31-2049D3BC3A3A.png",
+          attachments: [],
+        })
+        .then((response) => {
+          reloadAllData();
+        })
+        .catch((error) => {
+          console.log(error);
+        });
     }
   };
+  const handleReject = async (id, discId) => {
+    let res = await whitelistResponding(id, {
+      accepted: false,
+      rejected: true,
+      rejectReason: "Improve your form, maybe you will be selected later",
+    });
+    if (res) {
+      axios
+        .post(`${process.env.REACT_APP_DISCORD_WHITELIST_ACCEPT}`, {
+          content: `Sorry <@${discId}> ! You did not clear the form. Wait 7 days to re-apply`,
+          embeds: [
+            {
+              color: 15807514,
+              author: {
+                name: "Oh nooooo!!!!",
+                icon_url:
+                  "https://static.wikia.nocookie.net/gtawiki/images/4/49/LesterCrest-GTAVee.png",
+              },
+              image: {
+                url: `${
+                  randomRejectedImages[Math.floor(Math.random() * 5)].url
+                }`,
+              },
+            },
+          ],
+          username: "Lester Dada",
+          avatar_url:
+            "https://i.pinimg.com/originals/b6/97/2d/b6972d320611abaeb4e15c041667c939.jpg",
+          attachments: [],
+        })
+        .then((response) => {
+          reloadAllData();
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    }
+  };
+
   useEffect(() => {
     if (user) {
       reloadAllData();
@@ -132,6 +201,7 @@ const StaffPage = () => {
                         bodyData={data}
                         title={"Form Detail"}
                         handleAccept={handleAccept}
+                        handleReject={handleReject}
                       />
                     </>
                   );
