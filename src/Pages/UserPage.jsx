@@ -12,23 +12,19 @@ const UserPage = () => {
   const [whitelistData, setWhitelistData] = useState(null);
   const [loading, setLoading] = useState(true);
 
-  const whitelistStatusPager = () => {
+  const whitelistStatusPager = async () => {
     setLoading(true);
-    let res = getWhitelistStatus();
-    res
-      .then((response) => {
-        if (response.data.found) {
-          setWhitelistFound(true);
-          setWhitelistData(response.data.data);
-          setLoading(false);
-        } else {
-          setWhitelistFound(false);
-          setLoading(false);
-        }
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+    let response = await getWhitelistStatus();
+    if (response) {
+      if (response.data.found) {
+        setWhitelistFound(true);
+        setWhitelistData(response.data.data);
+        setLoading(false);
+      } else {
+        setWhitelistFound(false);
+        setLoading(false);
+      }
+    }
   };
   const handleSubmit = (values, { resetForm, setSubmitting }) => {
     setSubmitting(true);
@@ -36,6 +32,7 @@ const UserPage = () => {
     let res = postWhitelistForm(values);
     res
       .then((response) => {
+        whitelistStatusPager();
         axios
           .post(`${process.env.REACT_APP_DISCORD_WHITELIST}`, {
             content: `Hello <@&1078649873127182386>, There is a new form from ${values.nameIrl}, Discord: ${values.discordId}. Login using your staff account to view the form.`,
@@ -47,15 +44,16 @@ const UserPage = () => {
           .then((response) => {
             resetForm();
             setSubmitting(false);
-            whitelistStatusPager();
           })
           .catch((error) => {
             console.log(error);
+            setLoading(false);
             setSubmitting(false);
           });
       })
       .catch((error) => {
         setSubmitting(false);
+        setLoading(false);
         console.log(error);
       });
   };
@@ -64,6 +62,15 @@ const UserPage = () => {
       whitelistStatusPager();
     }
   }, [user]);
+  if (loading) {
+    return (
+      <div>
+        <Spinner animation="grow" />
+        <Spinner animation="grow" />
+        <Spinner animation="grow" />
+      </div>
+    );
+  }
 
   if (whitelistFound && whitelistData) {
     if (whitelistData[0]?.rejected) {
@@ -88,9 +95,7 @@ const UserPage = () => {
           <div className="small-container">
             <p className="heading-text">
               <span>WHitelist :</span>{" "}
-              {whitelistData[0]?.accepted === false
-                ? "Not Accepted"
-                : "Accepted"}
+              {whitelistData[0]?.accepted === false ? "Pending" : "Accepted"}
             </p>
             <p className="text">
               {whitelistData[0]?.accepted === false ? (
@@ -111,20 +116,19 @@ const UserPage = () => {
         </div>
       );
     }
-  } else if (whitelistFound !== (null && true) && whitelistData !== null) {
+  } else if (
+    whitelistFound !== null &&
+    whitelistFound === false &&
+    whitelistData === null
+  ) {
     return (
       <div>
         <WhitelistForm handleSubmit={handleSubmit} />
       </div>
     );
-  } else if (loading) {
-    return (
-      <div>
-        <Spinner animation="grow" />
-        <Spinner animation="grow" />
-        <Spinner animation="grow" />
-      </div>
-    );
+  } else {
+    console.log(whitelistFound, whitelistData);
+    return <div>Reload page to begin</div>;
   }
 };
 

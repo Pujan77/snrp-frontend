@@ -84,7 +84,7 @@ const HomePage = () => {
         />
         <div className="box">
           <div className="boxes left">
-            <p>Create your own autopark</p>
+            <p className="feature_big">Create your own autopark</p>
             <p className="b-text">
               <span>Select from 300+ vehicles!</span>
             </p>

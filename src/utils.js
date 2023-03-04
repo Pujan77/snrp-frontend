@@ -157,7 +157,7 @@ export function getTimeRequired(date) {
   const targetDate = new Date(date);
 
   // Add 5 days to the target date
-  targetDate.setDate(targetDate.getDate() + 5);
+  targetDate.setDate(targetDate.getDate() + 7);
 
   // Calculate the time difference between target date and current date
   const timeDiff = targetDate.getTime() - Date.now();
@@ -177,7 +177,7 @@ export function isDatePlusFiveDays(date) {
   const targetDate = new Date(date);
 
   // Add 5 days to the target date
-  targetDate.setDate(targetDate.getDate() + 5);
+  targetDate.setDate(targetDate.getDate() + 7);
 
   // Get the current date and time
   const currentDate = new Date();
