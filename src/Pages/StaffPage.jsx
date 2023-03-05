@@ -1,9 +1,9 @@
 import React, { useContext, useEffect, useState } from "react";
 import AuthContext from "../context/AuthContext";
 import { Spinner, Tab, Table, Tabs } from "react-bootstrap";
-import CustomModal from "../component/CustomModal";
 import axios from "axios";
 import { randomAcceptedImages, randomRejectedImages } from "../utils";
+import TableData from "../component/tableData";
 
 const StaffPage = () => {
   const { user, staffGetAllWhitelist, whitelistResponding } =
@@ -13,18 +13,6 @@ const StaffPage = () => {
   const [allRejectedData, setAllRejectedData] = useState(null);
   const [allAcceptedData, setAllAcceptedData] = useState(null);
   const [loading, setLoading] = useState(true);
-
-  const [show, setShow] = useState(false);
-  const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true);
-
-  const [showA, setShowA] = useState(false);
-  const handleCloseA = () => setShowA(false);
-  const handleShowA = () => setShowA(true);
-
-  const [showB, setShowB] = useState(false);
-  const handleCloseB = () => setShowB(false);
-  const handleShowB = () => setShowB(true);
 
   const allList = async () => {
     try {
@@ -197,23 +185,13 @@ const StaffPage = () => {
               <tbody>
                 {allNotAcceptedData.map((data, i) => {
                   return (
-                    <>
-                      <tr key={i} onClick={handleShow}>
-                        <td>{data.nameIrl}</td>
-                        <td>{data.ageIrl}</td>
-                        <td>{data.charName}</td>
-                        <td>{data.discordId}</td>
-                      </tr>
-                      <CustomModal
-                        handleClose={handleClose}
-                        show={show}
-                        bodyData={data}
-                        title={"Form Detail"}
-                        handleAccept={handleAccept}
-                        handleReject={handleReject}
-                        isChecking={true}
-                      />
-                    </>
+                    <TableData
+                      key={i}
+                      data={data}
+                      handleAccept={handleAccept}
+                      handleReject={handleReject}
+                      isChecking={true}
+                    />
                   );
                 })}
               </tbody>
@@ -232,23 +210,13 @@ const StaffPage = () => {
               <tbody>
                 {allAcceptedData.map((data, i) => {
                   return (
-                    <>
-                      <tr key={i} onClick={handleShowA}>
-                        <td>{data.nameIrl}</td>
-                        <td>{data.ageIrl}</td>
-                        <td>{data.charName}</td>
-                        <td>{data.discordId}</td>
-                      </tr>
-                      <CustomModal
-                        handleClose={handleCloseA}
-                        show={showA}
-                        bodyData={data}
-                        title={"Form Detail"}
-                        handleAccept={handleAccept}
-                        handleReject={handleReject}
-                        isChecking={false}
-                      />
-                    </>
+                    <TableData
+                      key={i}
+                      data={data}
+                      handleAccept={handleAccept}
+                      handleReject={handleReject}
+                      isChecking={false}
+                    />
                   );
                 })}
               </tbody>
@@ -267,23 +235,13 @@ const StaffPage = () => {
               <tbody>
                 {allRejectedData.map((data, i) => {
                   return (
-                    <>
-                      <tr key={i} onClick={handleShowB}>
-                        <td>{data.nameIrl}</td>
-                        <td>{data.ageIrl}</td>
-                        <td>{data.charName}</td>
-                        <td>{data.discordId}</td>
-                      </tr>
-                      <CustomModal
-                        handleClose={handleCloseB}
-                        show={showB}
-                        bodyData={data}
-                        title={"Form Detail"}
-                        handleAccept={handleAccept}
-                        handleReject={handleReject}
-                        isChecking={false}
-                      />
-                    </>
+                    <TableData
+                      key={i}
+                      data={data}
+                      handleAccept={handleAccept}
+                      handleReject={handleReject}
+                      isChecking={false}
+                    />
                   );
                 })}
               </tbody>
@@ -302,12 +260,13 @@ const StaffPage = () => {
               <tbody>
                 {allWhitelists.map((data, i) => {
                   return (
-                    <tr>
-                      <td>{data.nameIrl}</td>
-                      <td>{data.ageIrl}</td>
-                      <td>{data.charName}</td>
-                      <td>{data.discordId}</td>
-                    </tr>
+                    <TableData
+                      key={i}
+                      data={data}
+                      handleAccept={handleAccept}
+                      handleReject={handleReject}
+                      isChecking={false}
+                    />
                   );
                 })}
               </tbody>
