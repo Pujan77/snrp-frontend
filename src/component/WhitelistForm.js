@@ -26,9 +26,9 @@ const WhitelistForm = ({ handleSubmit }) => {
         <Formik
           initialValues={{
             steamName: "",
-            discordId: user?.discordId ? user?.discordId : "",
+            discordId: "",
             steamHex: "",
-            discordIdentifier: "",
+            discordIdentifier: user?.discordId ? user?.discordId : "",
             ageIrl: "",
             nameIrl: "",
             charName: "",
