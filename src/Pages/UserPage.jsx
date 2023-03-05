@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
 import AuthContext from "../context/AuthContext";
 import WhitelistForm from "../component/WhitelistForm";
-import { Spinner } from "react-bootstrap";
+import { Button, Spinner } from "react-bootstrap";
 import axios from "axios";
 import { getTimeRequired } from "../utils";
 
@@ -57,6 +57,9 @@ const UserPage = () => {
         console.log(error);
       });
   };
+  const handleLogin = () => {
+    window.location.href = `${process.env.REACT_APP_BASE_URL}auth/discord`;
+  };
   useEffect(() => {
     if (user) {
       whitelistStatusPager();
@@ -71,7 +74,6 @@ const UserPage = () => {
       </div>
     );
   }
-
   if (whitelistFound && whitelistData) {
     if (whitelistData[0]?.rejected) {
       return (
@@ -123,7 +125,15 @@ const UserPage = () => {
   ) {
     return (
       <div>
-        <WhitelistForm handleSubmit={handleSubmit} />
+        {user?.discordLinked === true ? (
+          <WhitelistForm handleSubmit={handleSubmit} />
+        ) : (
+          <div>
+            <Button variant="primary" onClick={handleLogin}>
+              Link Discord Id
+            </Button>
+          </div>
+        )}
       </div>
     );
   } else {

@@ -95,6 +95,10 @@ const Signup = () => {
             is waiting for you! Download & Play now!
           </p>
         </div>
+        <div>
+          Please make sure you use the same email you used on discord to avoid
+          conflicts
+        </div>
         <Formik
           initialValues={{
             firstName: "",

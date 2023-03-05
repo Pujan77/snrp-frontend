@@ -1,8 +1,9 @@
 import { ErrorMessage, Field, Form, Formik } from "formik";
-import React from "react";
+import React, { useContext } from "react";
 import { validationSchemaWhitelist } from "../utils";
 import { Popover } from "react-bootstrap";
 import OverlayTrigger from "react-bootstrap/OverlayTrigger";
+import AuthContext from "../context/AuthContext";
 const popover = (
   <Popover id="popover-basic">
     <Popover.Body>
@@ -18,13 +19,14 @@ const popover = (
   </Popover>
 );
 const WhitelistForm = ({ handleSubmit }) => {
+  const { user } = useContext(AuthContext);
   return (
     <div className="container whitelist_container">
       <div className="form_wrapper">
         <Formik
           initialValues={{
             steamName: "",
-            discordId: "",
+            discordId: user?.discordId ? user?.discordId : "",
             steamHex: "",
             discordIdentifier: "",
             ageIrl: "",
