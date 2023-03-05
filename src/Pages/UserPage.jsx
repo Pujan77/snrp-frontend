@@ -58,8 +58,9 @@ const UserPage = () => {
       });
   };
   const handleLogin = () => {
-    window.location.href = `${process.env.REACT_APP_BASE_URL}auth/discord`;
+    window.open(`${process.env.REACT_APP_BASE_URL}auth/discord`, "_blank");
   };
+
   useEffect(() => {
     if (user) {
       whitelistStatusPager();
