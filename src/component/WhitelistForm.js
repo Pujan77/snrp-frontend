@@ -107,6 +107,7 @@ const WhitelistForm = ({ handleSubmit }) => {
                       type="text"
                       id="discordIdentifier"
                       name="discordIdentifier"
+                      disabled
                       placeholder="right click profile and copy"
                       className="form-control"
                     />
