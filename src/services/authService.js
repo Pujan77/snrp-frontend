@@ -8,6 +8,12 @@ export const loginForm = async (data) =>
   // axiosInstance.post(`/api/v1/auth/change-password/`, data);
   axios.post(`${process.env.REACT_APP_BASE_URL}/login`, data);
 
+export const updateUserProfile = async () =>
+  axios.get(`${process.env.REACT_APP_BASE_URL}updatedProfile`, {
+    headers: {
+      Authorization: JSON.parse(localStorage.getItem("authToken")),
+    },
+  });
 export const whitelistStatus = async () =>
   axios.get(`${process.env.REACT_APP_BASE_URL}/whitelist`, {
     headers: {

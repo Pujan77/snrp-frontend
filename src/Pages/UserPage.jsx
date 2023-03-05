@@ -6,7 +6,7 @@ import axios from "axios";
 import { getTimeRequired } from "../utils";
 
 const UserPage = () => {
-  const { user, getWhitelistStatus, postWhitelistForm } =
+  const { user, getWhitelistStatus, postWhitelistForm, updateUsersProfile } =
     useContext(AuthContext);
   const [whitelistFound, setWhitelistFound] = useState(null);
   const [whitelistData, setWhitelistData] = useState(null);
@@ -66,6 +66,10 @@ const UserPage = () => {
       whitelistStatusPager();
     }
   }, [user]);
+  useEffect(() => {
+    updateUsersProfile();
+  }, []);
+
   if (loading) {
     return (
       <div>

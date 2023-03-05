@@ -6,6 +6,7 @@ import {
   staffWhitelistAllAccepted,
   staffWhitelistNotAccepted,
   staffWhitelistRejected,
+  updateUserProfile,
   whitelistForm,
   whitelistStatus,
 } from "../services/authService";
@@ -43,12 +44,19 @@ export const AuthProvider = ({ children }) => {
       let res = await loginForm(data);
       if (res) {
         let tokens = res.data.token;
-        let userData = res.data;
         setLoggedInStatus(true);
-        setUser(userData);
+        let newUserData = {
+          email: res.data.email,
+          role: res.data.role,
+          firstName: res.data.firstName,
+          lastName: res.data.lastName,
+          discordId: res.data.discordId,
+          discordLinked: res.data.discordLinked,
+        };
+        setUser(newUserData);
         setAuthToken(tokens);
         localStorage.setItem("authToken", JSON.stringify(tokens));
-        localStorage.setItem("user", JSON.stringify(userData));
+        localStorage.setItem("user", JSON.stringify(newUserData));
         //   localStorage.setItem("loggedInStatus", JSON.stringify({ logged: true }));
         return res;
       }
@@ -56,7 +64,24 @@ export const AuthProvider = ({ children }) => {
       throw error;
     }
   };
-
+  const updateUsersProfile = async () => {
+    try {
+      let res = await updateUserProfile();
+      let newUserData = {
+        email: res.data.email,
+        role: res.data.role,
+        firstName: res.data.firstName,
+        lastName: res.data.lastName,
+        discordId: res.data.discordId,
+        discordLinked: res.data.discordLinked,
+      };
+      setUser(newUserData);
+      localStorage.setItem("user", JSON.stringify(newUserData));
+      return res;
+    } catch (error) {
+      throw error;
+    }
+  };
   const logOutUser = async () => {
     setLoggedInStatus(false);
     setUser(null);
@@ -138,6 +163,7 @@ export const AuthProvider = ({ children }) => {
     postWhitelistForm: postWhitelistForm,
     staffGetAllWhitelist: staffGetAllWhitelist,
     whitelistResponding: whitelistResponding,
+    updateUsersProfile: updateUsersProfile,
   };
   return (
     <AuthContext.Provider value={contextData}>{children}</AuthContext.Provider>
