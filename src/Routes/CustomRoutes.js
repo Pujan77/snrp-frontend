@@ -7,6 +7,8 @@ import Login from "../Pages/Login";
 import PrivateRoute from "./PrivateRoute";
 import NavigationbarPrivate from "../layout/privateNavigation";
 import Dashboard from "../Pages/Dashboard";
+import ForgotPassword from "../Pages/ForgotPassword";
+import ResetPassword from "../Pages/ResetPassword";
 
 const CustomRoutes = () => {
   return (
@@ -16,6 +18,8 @@ const CustomRoutes = () => {
           <Route path="/" element={<Navigationbar />}>
             <Route path="/" exact element={<HomePage />} />
             <Route path="/signup" element={<Signup />} />
+            <Route path="/forgot-password" element={<ForgotPassword />} />
+            <Route path="/reset-password" element={<ResetPassword />} />
             <Route path="/login" element={<Login />} />
           </Route>
           <Route

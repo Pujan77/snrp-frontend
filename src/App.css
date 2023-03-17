@@ -417,3 +417,17 @@ a.anchor_custom {
 a.anchor_custom:hover {
     text-decoration: none;
 }
+
+p.forgot_password_text {
+    font-family: serif;
+}
+
+span.forgot_link {
+    font-family: serif;
+    font-weight: 800;
+    text-decoration: underline;
+    cursor: pointer;
+}
+span.forgot_link:hover {
+    text-decoration: none;
+}

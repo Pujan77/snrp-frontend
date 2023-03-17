@@ -1,6 +1,8 @@
 import {
   formResponse,
   loginForm,
+  resetFinal,
+  resetRequestForm,
   signUpForm,
   staffAllWhitelist,
   staffWhitelistAllAccepted,
@@ -91,6 +93,24 @@ export const AuthProvider = ({ children }) => {
     // window.location.href = "/";
   };
 
+  let resetRequestFirst = async (data) => {
+    try {
+      let res = await resetRequestForm(data);
+      return res;
+    } catch (error) {
+      throw error;
+    }
+  };
+
+  let resetRequestLast = async (data) => {
+    try {
+      let res = await resetFinal(data);
+      return res;
+    } catch (error) {
+      throw error;
+    }
+  };
+
   let getWhitelistStatus = async () => {
     try {
       let res = whitelistStatus();
@@ -164,6 +184,8 @@ export const AuthProvider = ({ children }) => {
     staffGetAllWhitelist: staffGetAllWhitelist,
     whitelistResponding: whitelistResponding,
     updateUsersProfile: updateUsersProfile,
+    resetRequestFirst: resetRequestFirst,
+    resetRequestLast: resetRequestLast,
   };
   return (
     <AuthContext.Provider value={contextData}>{children}</AuthContext.Provider>

@@ -8,6 +8,14 @@ export const loginForm = async (data) =>
   // axiosInstance.post(`/api/v1/auth/change-password/`, data);
   axios.post(`${process.env.REACT_APP_BASE_URL}/login`, data);
 
+export const resetRequestForm = async (data) =>
+  // axiosInstance.post(`/api/v1/auth/change-password/`, data);
+  axios.post(`${process.env.REACT_APP_BASE_URL}/forgot-password`, data);
+
+export const resetFinal = async (data) =>
+  // axiosInstance.post(`/api/v1/auth/change-password/`, data);
+  axios.post(`${process.env.REACT_APP_BASE_URL}/reset-password`, data);
+
 export const updateUserProfile = async () =>
   axios.get(`${process.env.REACT_APP_BASE_URL}updatedProfile`, {
     headers: {

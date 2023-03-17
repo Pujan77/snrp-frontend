@@ -1,13 +1,12 @@
 import { ErrorMessage, Field, Form, Formik } from "formik";
-import React, { useContext } from "react";
-import { Card } from "react-bootstrap";
-import { Navigate, useLocation, useNavigate } from "react-router-dom";
+import React, { useContext, useState } from "react";
+import { Alert, Card } from "react-bootstrap";
+import { Navigate } from "react-router-dom";
 import AuthContext from "../context/AuthContext";
 
-const Login = () => {
-  const { loginUser, loggedInStatus } = useContext(AuthContext);
-  let location = useLocation();
-  const navigate = useNavigate();
+const ForgotPassword = () => {
+  const { resetRequestFirst, loggedInStatus } = useContext(AuthContext);
+  const [submittedMessage, setSubmittedMessage] = useState(null);
   const validate = (values) => {
     const errors = {};
 
@@ -17,20 +16,14 @@ const Login = () => {
       errors.email = "Invalid email address";
     }
 
-    if (!values.password) {
-      errors.password = "Required";
-    } else if (!/^(?=.*[0-9])(?=.*[a-zA-Z]).{6,16}$/i.test(values.password)) {
-      errors.password = "Invalid Password";
-    }
-
     return errors;
   };
   const handleSubmit = async (values, { resetForm, setSubmitting }) => {
-    let res = await loginUser(values);
+    let res = await resetRequestFirst(values);
     if (res) {
       resetForm();
       setSubmitting(false);
-      navigate("/user/dashboard");
+      setSubmittedMessage("Check your email for the reset link.");
     }
   };
   if (loggedInStatus) {
@@ -40,13 +33,15 @@ const Login = () => {
       <div className="white-container">
         <div className="small-container">
           <p className="heading-text">
-            <span>LOGIN</span> TO BEGIN
+            <span>Reset</span> Password
           </p>
         </div>
+        {submittedMessage && (
+          <Alert variant="success">{submittedMessage}</Alert>
+        )}
         <Formik
           initialValues={{
-            email: location?.state?.email ? location?.state?.email : "",
-            password: "",
+            email: "",
           }}
           onSubmit={handleSubmit}
           validate={validate}
@@ -54,7 +49,7 @@ const Login = () => {
           {({ isSubmitting, resetForm }) => (
             <Form className="form_login">
               <Card>
-                <Card.Header>Login</Card.Header>
+                <Card.Header>Reset Password Request</Card.Header>
                 <Card.Body>
                   <div className="form-group mt-3">
                     <Field
@@ -70,21 +65,6 @@ const Login = () => {
                       component="div"
                     />
                   </div>
-
-                  <div className="form-group mt-3">
-                    <Field
-                      type="password"
-                      id="password"
-                      name="password"
-                      placeholder="Password"
-                      className="form-control"
-                    />
-                    <ErrorMessage
-                      className="error_message"
-                      name="password"
-                      component="div"
-                    />
-                  </div>
                 </Card.Body>
                 <Card.Footer>
                   <div className="button-wrapper">
@@ -93,7 +73,7 @@ const Login = () => {
                       className="btn btn-outline-primary"
                       disabled={isSubmitting}
                     >
-                      Login
+                      Send
                     </button>
                   </div>
                 </Card.Footer>
@@ -101,20 +81,9 @@ const Login = () => {
             </Form>
           )}
         </Formik>
-        <div className="forgot-wrapper">
-          <p className="forgot_password_text">
-            Forgot password?{" "}
-            <span
-              className="forgot_link"
-              onClick={() => navigate("/forgot-password")}
-            >
-              Reset password here
-            </span>
-          </p>
-        </div>
       </div>
     );
   }
 };
 
-export default Login;
+export default ForgotPassword;
